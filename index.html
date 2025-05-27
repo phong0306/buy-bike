@@ -397,6 +397,24 @@
     window.addEventListener('scroll', smoothBgEffect, {passive: true});
     window.addEventListener('DOMContentLoaded', smoothBgEffect);
     window.addEventListener('resize', smoothBgEffect);
+
+    function getCart() {
+        return JSON.parse(localStorage.getItem('cart')) || [];
+    }
+    function setCart(cart) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('cartCount').textContent = cart.length;
+    }
+    function addToCart(event, productName) {
+        event.preventDefault();
+        let cart = getCart();
+        cart.push(productName);
+        setCart(cart);
+        // Hiển thị thông báo hoặc hiệu ứng nếu muốn
+    }
+    window.addEventListener('DOMContentLoaded', function() {
+        setCart(getCart());
+    });
     </script>
 </body>
 </html>
